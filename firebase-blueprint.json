@@ -1,0 +1,116 @@
+{
+  "entities": {
+    "Student": {
+      "title": "Student",
+      "description": "Information about a registered student",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique student identifier" },
+        "name": { "type": "string", "description": "Full name of the student" },
+        "grade": { "type": "string", "description": "Current grade of the student" },
+        "section": { "type": "string", "description": "Class section" },
+        "gender": { "type": "string", "enum": ["Male", "Female"], "description": "Gender" }
+      },
+      "required": ["id", "name", "grade", "section"]
+    },
+    "Grade": {
+      "title": "Grade",
+      "description": "Student academic performance record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "subject": { "type": "string" },
+        "quiz": { "type": "number" },
+        "cw": { "type": "number" },
+        "hw": { "type": "number" },
+        "mid": { "type": "number" },
+        "final": { "type": "number" },
+        "total": { "type": "number" },
+        "teacher": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "term": { "type": "number" }
+      },
+      "required": ["id", "studentId", "subject", "total"]
+    },
+    "Teacher": {
+      "title": "Teacher",
+      "description": "Registered faculty member details",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "name": { "type": "string" },
+        "subjects": { "type": "array" },
+        "classes": { "type": "array" },
+        "isHomeroom": { "type": "boolean" },
+        "homeroomClass": { "type": "string" }
+      },
+      "required": ["email", "name"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "School announcement or notice board post",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "date": { "type": "string" },
+        "targetAudience": { "type": "string" }
+      },
+      "required": ["id", "title", "content"]
+    },
+    "ClassSetup": {
+      "title": "ClassSetup",
+      "description": "Classroom details and assignments",
+      "type": "object",
+      "properties": {
+        "grade": { "type": "string" },
+        "section": { "type": "string" },
+        "homeroomTeacher": { "type": "string" }
+      },
+      "required": ["grade", "section"]
+    },
+    "UserRole": {
+      "title": "UserRole",
+      "description": "Access control and role assignment for users",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string", "enum": ["principal", "teacher", "parent"] },
+        "email": { "type": "string" }
+      },
+      "required": ["role", "email"]
+    }
+  },
+  "firestore": {
+    "schools/{schoolId}/students/{studentId}": {
+      "schema": "Student",
+      "description": "Registered students collection under a specific school workspace"
+    },
+    "schools/{schoolId}/grades/{gradeId}": {
+      "schema": "Grade",
+      "description": "Student academic performance records collection under a specific school workspace"
+    },
+    "schools/{schoolId}/teachers/{teacherId}": {
+      "schema": "Teacher",
+      "description": "Faculty directory collection under a specific school workspace"
+    },
+    "schools/{schoolId}/announcements/{announcementId}": {
+      "schema": "Announcement",
+      "description": "Official school bulletin posts under a specific school workspace"
+    },
+    "schools/{schoolId}/classes/{classId}": {
+      "schema": "ClassSetup",
+      "description": "Academic classes setup details under a specific school workspace"
+    },
+    "schools/{schoolId}/studentExtraInfo/{studentId}": {
+      "schema": "object",
+      "description": "Student attendance and conduct extra records under a specific school workspace"
+    },
+    "schools/{schoolId}/config/{configId}": {
+      "schema": "object",
+      "description": "School white-label configuration settings under a specific school workspace"
+    }
+  }
+}

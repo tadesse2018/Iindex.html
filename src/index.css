@@ -1,0 +1,491 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* 🎨 THEME CONFIGURATION VARIABLES */
+:root {
+  --bg-app: #f8fafc;         /* Crisp, soft blue-grey page background */
+  --bg-card: #ffffff;        /* Pure white card surface */
+  --bg-input: #fafaf9;       /* Light stone background for fields */
+  --text-primary: #0f172a;   /* Rich slate-900 for high-contrast headings */
+  --text-secondary: #475569; /* Medium slate-600 for body copy */
+  --text-muted: #94a3b8;     /* Slate-400 for secondary tags */
+  --border-color: #e2e8f0;   /* Slate-200 for clean outer borders */
+  --border-light: #f1f5f9;   /* Slate-100 for light background lines */
+}
+
+.dark {
+  --bg-app: #0c0a09;         /* Premium Obsidian black page background */
+  --bg-card: #1c1917;        /* Cozy warm-stone dark card surface */
+  --bg-input: #12100e;       /* Deep recessed stone input background */
+  --text-primary: #f5f5f4;   /* High-contrast soft stone off-white */
+  --text-secondary: #d6d3d1; /* Medium contrast warm-stone grey */
+  --text-muted: #78716c;     /* Muted stone grey for secondary info */
+  --border-color: #2e2a28;   /* Thin charcoal border lines */
+  --border-light: #1c1917;   /* Ultra-dark border lines */
+}
+
+/* 🌟 BASE LAYOUT STYLES */
+body, 
+#root {
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.dark,
+.dark .min-h-screen {
+  background-color: var(--bg-app) !important;
+  color: var(--text-primary) !important;
+}
+
+/* 🔄 SMOOTH SWITCHING TRANSITIONS */
+.transition-all,
+.transition-colors {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* 🗂️ CARD & PANEL COLOR MAPPING */
+.dark .bg-white,
+.dark .bg-stone-50,
+.dark .bg-slate-50,
+.dark .bg-gray-50,
+.dark [class*="bg-white/"],
+.dark [class*="bg-white\/"],
+.dark .bg-[#F8F9FC] {
+  background-color: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Neutralize bright background gradients to solid deep cards in dark mode */
+.dark [class*="bg-gradient-"] {
+  background-image: none !important;
+  background-color: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+}
+
+/* App page background contrasts */
+.dark .bg-stone-50\/50,
+.dark .bg-slate-50\/50,
+.dark [class*="bg-stone-50/"],
+.dark [class*="bg-stone-50\/"],
+.dark [class*="bg-slate-50/"],
+.dark [class*="bg-slate-50\/"],
+.dark .bg-stone-100,
+.dark .bg-slate-100,
+.dark .bg-[#F8F9FC] {
+  background-color: var(--bg-app) !important;
+}
+
+/* 🔤 TYPOGRAPHY & CONTRAST CALIBRATION (LIGHT & DARK MODES) */
+
+/* 🌞 LIGHT MODE ACCESSIBILITY & CONTRAST ENHANCEMENTS */
+.text-stone-400,
+.text-slate-400,
+.text-gray-400,
+.text-neutral-400 {
+  color: #4b5563 !important; /* Elevates contrast ratio to over 5:1 for flawless legibility on light/white surfaces */
+}
+
+.text-stone-500,
+.text-slate-500,
+.text-gray-500,
+.text-neutral-500 {
+  color: #1e293b !important; /* Premium rich body-grey with excellent contrast (slate-800) */
+}
+
+.text-stone-300,
+.text-slate-300,
+.text-gray-300,
+.text-neutral-300 {
+  color: #64748b !important; /* Premium readable muted text (slate-500) */
+}
+
+/* 🌙 DARK MODE CONTRAST ADAPTATION & RECALIBRATION */
+.dark .text-stone-950,
+.dark .text-slate-950,
+.dark .text-gray-950,
+.dark .text-stone-900,
+.dark .text-slate-900,
+.dark .text-stone-800,
+.dark .text-slate-800,
+.dark .text-gray-900,
+.dark .text-gray-800 {
+  color: var(--text-primary) !important; /* Adapts very dark texts to rich off-white in dark mode */
+}
+
+.dark .text-stone-700,
+.dark .text-slate-700,
+.dark .text-stone-600,
+.dark .text-slate-600,
+.dark .text-gray-700,
+.dark .text-gray-600 {
+  color: var(--text-secondary) !important;
+}
+
+.dark .text-stone-500,
+.dark .text-slate-500,
+.dark .text-stone-400,
+.dark .text-slate-400,
+.dark .text-gray-500,
+.dark .text-gray-400 {
+  color: var(--text-secondary) !important;
+}
+
+/* 🔏 BRAND COLOR CONTRAST TENSION (PREVENTS DARK BRAND TEXT ON DARK BG) */
+.dark .text-indigo-950,
+.dark .text-indigo-900,
+.dark .text-indigo-850,
+.dark .text-indigo-800,
+.dark .text-indigo-700,
+.dark .text-indigo-600,
+.dark .text-indigo-500 {
+  color: #a5b4fc !important; /* High-contrast active indigo */
+}
+
+.dark .text-emerald-950,
+.dark .text-emerald-900,
+.dark .text-emerald-850,
+.dark .text-emerald-800,
+.dark .text-emerald-700,
+.dark .text-emerald-600,
+.dark .text-emerald-500 {
+  color: #6ee7b7 !important; /* Luminous readable emerald green */
+}
+
+.dark .text-amber-950,
+.dark .text-amber-900,
+.dark .text-amber-850,
+.dark .text-amber-800,
+.dark .text-amber-700,
+.dark .text-amber-600,
+.dark .text-amber-500 {
+  color: #fde047 !important; /* High-contrast radiant warm gold */
+}
+
+.dark .text-rose-950,
+.dark .text-rose-900,
+.dark .text-rose-850,
+.dark .text-rose-800,
+.dark .text-rose-750,
+.dark .text-rose-700,
+.dark .text-rose-600,
+.dark .text-rose-500 {
+  color: #fca5a5 !important; /* Luminous gentle rose */
+}
+
+.dark .text-violet-950,
+.dark .text-violet-900,
+.dark .text-violet-850,
+.dark .text-violet-800,
+.dark .text-violet-700,
+.dark .text-violet-600,
+.dark .text-violet-500 {
+  color: #d8b4fe !important; /* Luminous royal violet */
+}
+
+/* 🔗 BORDERS & DIVISION LINES */
+.dark .border-stone-50,
+.dark .border-stone-100,
+.dark .border-stone-150,
+.dark .border-stone-200,
+.dark .border-stone-250,
+.dark .border-stone-300,
+.dark .border-stone-400,
+.dark .border-stone-500,
+.dark .border-stone-600,
+.dark .border-stone-700,
+.dark .border-stone-800,
+.dark .border-stone-900,
+.dark .border-stone-950,
+.dark .border-slate-100,
+.dark .border-slate-150,
+.dark .border-slate-200,
+.dark .border-slate-300,
+.dark .border-indigo-100,
+.dark .border-indigo-200,
+.dark .border-indigo-300,
+.dark .border-emerald-100,
+.dark .border-emerald-200,
+.dark .border-emerald-300,
+.dark .border-violet-100,
+.dark .border-violet-200,
+.dark .border-violet-300,
+.dark .border-rose-100,
+.dark .border-rose-200,
+.dark .border-rose-300,
+.dark .border-amber-100,
+.dark .border-amber-200,
+.dark .border-amber-300,
+.dark [class*="border-stone-"],
+.dark [class*="border-slate-"],
+.dark [class*="border-indigo-"],
+.dark [class*="border-emerald-"],
+.dark [class*="border-violet-"],
+.dark [class*="border-rose-"],
+.dark [class*="border-amber-"] {
+  border-color: var(--border-color) !important;
+}
+
+/* 📥 INPUTS, FIELD BOXES, & SELECT DROPDOWNS */
+.dark input,
+.dark select,
+.dark textarea {
+  background-color: var(--bg-input) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark input:focus,
+.dark select:focus,
+.dark textarea:focus {
+  border-color: var(--accent-color) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 1px var(--accent-color) !important;
+}
+
+.dark input::placeholder,
+.dark select::placeholder {
+  color: var(--text-muted) !important;
+}
+
+.dark select option {
+  background-color: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+}
+
+/* 📊 DATA TABLES & LISTS */
+.dark table {
+  border-color: var(--border-color) !important;
+}
+
+.dark tr, 
+.dark td, 
+.dark th {
+  border-color: var(--border-color) !important;
+}
+
+.dark th {
+  background-color: var(--bg-app) !important;
+  color: var(--text-primary) !important;
+}
+
+.dark tr:hover {
+  background-color: rgba(46, 42, 40, 0.4) !important;
+}
+
+/* 🏷️ TINTED BADGES & STATUS CONTAINERS IN DARK MODE (WITH FULL WILDCARD OPACITY SUPPORT) */
+.dark .bg-indigo-50,
+.dark [class*="bg-indigo-50/"],
+.dark [class*="bg-indigo-50\/"] {
+  background-color: rgba(67, 56, 202, 0.15) !important;
+  border-color: rgba(99, 102, 241, 0.3) !important;
+}
+
+.dark .bg-blue-50,
+.dark [class*="bg-blue-50/"],
+.dark [class*="bg-blue-50\/"] {
+  background-color: rgba(37, 99, 235, 0.15) !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+.dark .bg-blue-100,
+.dark [class*="bg-blue-100/"],
+.dark [class*="bg-blue-100\/"] {
+  background-color: rgba(37, 99, 235, 0.2) !important;
+  color: #60a5fa !important;
+}
+
+.dark .text-blue-600,
+.dark .text-blue-700,
+.dark .text-blue-800 {
+  color: #60a5fa !important;
+}
+
+.dark .border-blue-100,
+.dark .border-blue-200 {
+  border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+.dark .bg-emerald-50,
+.dark [class*="bg-emerald-50/"],
+.dark [class*="bg-emerald-50\/"] {
+  background-color: rgba(4, 120, 87, 0.15) !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+
+.dark .bg-amber-50,
+.dark [class*="bg-amber-50/"],
+.dark [class*="bg-amber-50\/"] {
+  background-color: rgba(180, 83, 9, 0.15) !important;
+  border-color: rgba(245, 158, 11, 0.3) !important;
+}
+
+.dark .bg-rose-50,
+.dark [class*="bg-rose-50/"],
+.dark [class*="bg-rose-50\/"] {
+  background-color: rgba(190, 24, 74, 0.15) !important;
+  border-color: rgba(244, 63, 94, 0.3) !important;
+}
+
+.dark .bg-violet-50,
+.dark [class*="bg-violet-50/"],
+.dark [class*="bg-violet-50\/"] {
+  background-color: rgba(109, 40, 217, 0.15) !important;
+  border-color: rgba(139, 92, 246, 0.3) !important;
+}
+
+/* Solid background containers mapped to translucent modern dark containers */
+.dark .bg-indigo-100 {
+  background-color: rgba(67, 56, 202, 0.2) !important;
+  color: #818cf8 !important;
+}
+
+.dark .bg-emerald-100 {
+  background-color: rgba(4, 120, 87, 0.2) !important;
+  color: #34d399 !important;
+}
+
+.dark .bg-amber-100 {
+  background-color: rgba(180, 83, 9, 0.2) !important;
+  color: #fbbf24 !important;
+}
+
+.dark .bg-rose-100 {
+  background-color: rgba(190, 24, 74, 0.2) !important;
+  color: #fb7185 !important;
+}
+
+.dark .bg-violet-100 {
+  background-color: rgba(109, 40, 217, 0.2) !important;
+  color: #c084fc !important;
+}
+
+/* 🔘 BUTTON TINTS AND HOVER EFFECTS */
+.dark .bg-stone-100,
+.dark .bg-slate-100 {
+  background-color: var(--bg-input) !important;
+  color: var(--text-primary) !important;
+}
+
+.dark .bg-stone-100.hover\:bg-stone-200:hover,
+.dark .bg-slate-100.hover\:bg-slate-200:hover,
+.dark .bg-stone-100.hover\:bg-stone-150:hover,
+.dark .bg-stone-100.hover\:bg-indigo-50:hover,
+.dark .bg-stone-100.hover\:bg-emerald-50:hover,
+.dark .bg-stone-100.hover\:bg-rose-50:hover,
+.dark .bg-stone-100.hover\:bg-amber-50:hover {
+  background-color: var(--border-color) !important;
+}
+
+/* Dynamic Hover Effects */
+.dark .hover\:bg-indigo-50:hover {
+  background-color: rgba(67, 56, 202, 0.15) !important;
+  color: #818cf8 !important;
+}
+
+.dark .hover\:bg-emerald-50:hover {
+  background-color: rgba(4, 120, 87, 0.15) !important;
+  color: #34d399 !important;
+}
+
+.dark .hover\:bg-rose-50:hover {
+  background-color: rgba(190, 24, 74, 0.15) !important;
+  color: #fb7185 !important;
+}
+
+.dark .hover\:bg-amber-50:hover {
+  background-color: rgba(180, 83, 9, 0.15) !important;
+  color: #fbbf24 !important;
+}
+
+.dark .hover\:bg-stone-100:hover,
+.dark .hover\:bg-slate-100:hover {
+  background-color: rgba(46, 42, 40, 0.6) !important;
+}
+
+/* Overlay & Dialog fixes */
+.dark .fixed.inset-0.bg-stone-950\/60 {
+  background-color: rgba(12, 10, 9, 0.85) !important;
+}
+
+/* 📄 EXEMPTION FOR REPORT CARDS & PRINT PREVIEWS */
+.dark #printable-area,
+.dark #printable-area *,
+.dark #print-target-sheet,
+.dark #print-target-sheet *,
+.dark #report-card-print-area,
+.dark #report-card-print-area * {
+  background-color: #ffffff !important;
+  color: #1c1917 !important;
+  border-color: #e7e5e4 !important;
+}
+
+.dark #printable-area th,
+.dark #print-target-sheet th,
+.dark #report-card-print-area th {
+  background-color: #f5f5f4 !important;
+  color: #1c1917 !important;
+  border-color: #d6d3d1 !important;
+}
+
+.dark #printable-area td,
+.dark #print-target-sheet td,
+.dark #report-card-print-area td {
+  background-color: #ffffff !important;
+  color: #44403c !important;
+  border-color: #e7e5e4 !important;
+}
+
+/* 📜 PREMIUM SCROLLBARS */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-app);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* 📊 CHART STYLING */
+.dark .recharts-default-tooltip {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.dark .recharts-tooltip-item-list {
+  color: var(--text-secondary) !important;
+}
+
+/* 🎥 QR SCANNER ANIMATION */
+@keyframes scan-laser {
+  0% {
+    top: 0%;
+  }
+  50% {
+    top: 100%;
+  }
+  100% {
+    top: 0%;
+  }
+}
+
+@utility animate-scan-laser {
+  animation: scan-laser 2.5s infinite linear;
+}
+
