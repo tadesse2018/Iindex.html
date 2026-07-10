@@ -1,6 +1,14 @@
 // Interactive Web Audio API sound generator
 export function playInteractiveSound(type: 'click' | 'success' | 'correct' | 'wrong' | 'register' | 'logout') {
-  if (typeof window === 'undefined' || !window.AudioContext) return;
+  if (typeof window === 'undefined') return;
+  
+  // Sound is muted by default to provide a quiet, professional experience.
+  // It will only play if explicitly enabled in localStorage.
+  if (localStorage.getItem('sound_enabled') !== 'true') {
+    return;
+  }
+
+  if (!window.AudioContext) return;
   try {
     const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
     const osc = ctx.createOscillator();

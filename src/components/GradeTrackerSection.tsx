@@ -1222,6 +1222,7 @@ export const GradeTrackerSection: React.FC<GradeTrackerSectionProps> = ({
             border-left: none !important;
             text-align: center !important;
             vertical-align: middle !important;
+            color: #ffffff !important;
           }
 
           .roster-printable-table td {
@@ -1611,37 +1612,35 @@ export const GradeTrackerSection: React.FC<GradeTrackerSectionProps> = ({
                   <div className="overflow-x-auto w-full">
                     <table className="w-full text-[10px] text-left border-collapse border roster-printable-table" style={{ borderColor: '#000000' }}>
                       <thead>
-                        <tr style={{ backgroundColor: '#1e293b', color: '#ffffff', borderBottom: '2px solid #000000' }}>
-                          <th className="p-2 border text-stone-100" style={{ borderColor: '#000000' }} rowSpan={2}>No.</th>
-                          <th className="p-2 border text-stone-100" style={{ borderColor: '#000000' }} rowSpan={2}>Name / ስም</th>
-                          <th className="p-2 border text-stone-100" style={{ borderColor: '#000000' }} rowSpan={2}>Sex</th>
-                          <th className="p-2 border text-stone-100" style={{ borderColor: '#000000' }} rowSpan={2}>Age</th>
-                          <th className="p-2 border text-stone-100" style={{ borderColor: '#000000' }} rowSpan={2}>Term</th>
-                          <th className="p-1 border text-center text-stone-100 bg-slate-800" style={{ borderColor: '#000000' }} colSpan={subjects.length}>SUBJECTS / ትምህርቶች</th>
+                        <tr style={{ backgroundColor: '#1e293b', borderBottom: '2px solid #000000' }}>
+                          <th className="p-2 border font-bold text-center" style={{ borderColor: '#000000', backgroundColor: '#1e293b', color: '#ffffff', verticalAlign: 'middle' }}>No.</th>
+                          <th className="p-2 border font-bold text-center" style={{ borderColor: '#000000', backgroundColor: '#1e293b', color: '#ffffff', verticalAlign: 'middle' }}>Name / ስም</th>
+                          <th className="p-2 border font-bold text-center" style={{ borderColor: '#000000', backgroundColor: '#1e293b', color: '#ffffff', verticalAlign: 'middle' }}>Sex</th>
+                          <th className="p-2 border font-bold text-center" style={{ borderColor: '#000000', backgroundColor: '#1e293b', color: '#ffffff', verticalAlign: 'middle' }}>Age</th>
+                          <th className="p-2 border font-bold text-center" style={{ borderColor: '#000000', backgroundColor: '#1e293b', color: '#ffffff', verticalAlign: 'middle' }}>Term / ክፍል</th>
                           
-                          {/* Distinctive, Color-Coded Header Columns */}
-                          <th className="p-2 border text-center font-black text-[10px] text-white" style={{ backgroundColor: '#1e3a8a', borderColor: '#000000' }} rowSpan={2}>
-                            ድምር<br/>Total
-                          </th>
-                          <th className="p-2 border text-center font-black text-[10px] text-white" style={{ backgroundColor: '#064e3b', borderColor: '#000000' }} rowSpan={2}>
-                            አማካይ<br/>Avg
-                          </th>
-                          <th className="p-2 border text-center font-black text-[10px] text-white" style={{ backgroundColor: '#4c1d95', borderColor: '#000000' }} rowSpan={2}>
-                            ደረጃ<br/>Rank
-                          </th>
-                          <th className="p-2 border text-center font-black text-[10px] text-white" style={{ backgroundColor: '#312e81', borderColor: '#000000' }} rowSpan={2}>
-                            ምግባር<br/>Cond.
-                          </th>
-                          <th className="p-2 border text-center font-black text-[10px] text-white" style={{ backgroundColor: '#881337', borderColor: '#000000' }} rowSpan={2}>
-                            ቀሪ<br/>Abs.
-                          </th>
-                        </tr>
-                        <tr style={{ backgroundColor: '#334155', color: '#ffffff', borderBottom: '2px solid #000000' }}>
                           {subjects.map(sub => (
-                            <th key={sub} className="p-1 border text-center text-stone-200" style={{ borderColor: '#000000' }}>
+                            <th key={sub} className="p-1 border text-center font-bold" style={{ borderColor: '#000000', backgroundColor: '#334155', color: '#ffffff', verticalAlign: 'middle' }}>
                               {sub}
                             </th>
                           ))}
+                          
+                          {/* Distinctive, Color-Coded Header Columns */}
+                          <th className="p-2 border text-center font-black text-[10px]" style={{ backgroundColor: '#1e3a8a', borderColor: '#000000', color: '#ffffff', verticalAlign: 'middle' }}>
+                            ድምር<br/>Total
+                          </th>
+                          <th className="p-2 border text-center font-black text-[10px]" style={{ backgroundColor: '#064e3b', borderColor: '#000000', color: '#ffffff', verticalAlign: 'middle' }}>
+                            አማካይ<br/>Avg
+                          </th>
+                          <th className="p-2 border text-center font-black text-[10px]" style={{ backgroundColor: '#4c1d95', borderColor: '#000000', color: '#ffffff', verticalAlign: 'middle' }}>
+                            ደረጃ<br/>Rank
+                          </th>
+                          <th className="p-2 border text-center font-black text-[10px]" style={{ backgroundColor: '#312e81', borderColor: '#000000', color: '#ffffff', verticalAlign: 'middle' }}>
+                            ምግባር<br/>Cond.
+                          </th>
+                          <th className="p-2 border text-center font-black text-[10px]" style={{ backgroundColor: '#881337', borderColor: '#000000', color: '#ffffff', verticalAlign: 'middle' }}>
+                            ቀሪ<br/>Abs.
+                          </th>
                         </tr>
                       </thead>
                       {filteredStudents.map((student, sIdx) => (
@@ -1688,15 +1687,15 @@ export const GradeTrackerSection: React.FC<GradeTrackerSectionProps> = ({
                             let rowBgStyle = {};
                             if (row.id === 'SEM1_AVG' || row.id === 'SEM1') {
                               rowBgClass = "text-sky-950 font-semibold";
-                              rowBgStyle = { backgroundColor: '#f0f9ff' };
+                              rowBgStyle = { backgroundColor: '#f0f9ff', color: '#0c4a6e' };
                               printRowClass = "print-bg-sem1";
                             } else if (row.id === 'SEM2_AVG' || row.id === 'SEM2') {
                               rowBgClass = "text-emerald-950 font-semibold";
-                              rowBgStyle = { backgroundColor: '#ecfdf5' };
+                              rowBgStyle = { backgroundColor: '#ecfdf5', color: '#064e3b' };
                               printRowClass = "print-bg-sem2";
                             } else if (row.id === 'ANNUAL') {
                               rowBgClass = "text-amber-950 font-extrabold";
-                              rowBgStyle = { backgroundColor: '#fffbeb' };
+                              rowBgStyle = { backgroundColor: '#fffbeb', color: '#78350f' };
                               printRowClass = "print-bg-annual";
                             }
 
